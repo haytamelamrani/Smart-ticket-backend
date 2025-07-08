@@ -26,7 +26,7 @@ public class AdminController {
     private final UserService userService;
     private final DashboardService dashboardService;
 
-    // 🔍 1. Récupérer tous les utilisateurs
+    //  1. Récupérer tous les utilisateurs
     @GetMapping("/users")
     public ResponseEntity<List<UserAdminDto>> getAllUsers() {
         List<UserAdminDto> users = userRepository.findAll().stream()
@@ -45,7 +45,7 @@ public class AdminController {
         return ResponseEntity.ok(users);
     }
 
-    // 🛠️ 2. Modifier le rôle d’un utilisateur
+    //  2. Modifier le rôle d’un utilisateur
     @PutMapping("/users/role")
     public ResponseEntity<String> updateUserRole(@RequestBody UpdateUserRoleDto dto) {
         boolean updated = userService.updateUserRole(dto);
@@ -56,7 +56,7 @@ public class AdminController {
         }
     }
 
-    // ❌ 3. Supprimer un utilisateur
+    //  3. Supprimer un utilisateur
     @DeleteMapping("/users/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         boolean deleted = userService.deleteUserById(id);
@@ -67,7 +67,7 @@ public class AdminController {
         }
     }
 
-    // 📊 4. Dashboard admin (statistiques globales)
+    //  4. Dashboard admin (statistiques globales)
     @GetMapping("/dashboard")
     public AdminDashboardDto getAdminDashboard() {
         System.out.println("👤 Rôles de l'utilisateur connecté : " +

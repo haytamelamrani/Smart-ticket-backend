@@ -15,7 +15,7 @@ public class MessageController {
 
     private final MessageService messageService;
 
-    // ✅ Enregistrer un message
+    //  Enregistrer un message
     @PostMapping
     public Message saveMessage(@RequestBody MessageDto dto) {
         try {
@@ -38,7 +38,7 @@ public class MessageController {
 
 
 
-    // ✅ Obtenir tous les messages d’un ticket (historique)
+    //  Obtenir tous les messages d’un ticket (historique)
     @GetMapping("/ticket/{ticketId}")
     public List<Message> getMessagesByTicket(@PathVariable Long ticketId) {
         return messageService.getMessagesByTicket(ticketId);

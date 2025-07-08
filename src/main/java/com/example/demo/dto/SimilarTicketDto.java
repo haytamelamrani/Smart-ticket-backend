@@ -9,7 +9,7 @@ public class SimilarTicketDto {
     private String priority;
     private String category;
     private String type;
-    private double similarity; // 🎯 Pourcentage
+    private double similarity; //  Pourcentage
 
     public Long getId() {
         return id;

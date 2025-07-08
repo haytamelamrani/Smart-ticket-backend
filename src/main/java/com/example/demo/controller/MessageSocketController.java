@@ -17,7 +17,7 @@ public class MessageSocketController {
     private final MessageService messageService;
     private final SimpMessagingTemplate messagingTemplate;
 
-    // 👉 Envoie de message via WebSocket (canal "/app/chat")
+    // Envoie de message via WebSocket (canal "/app/chat")
     @MessageMapping("/chat")
     public void handleMessage(@Payload MessageDto dto) {
         // Enregistrement en base

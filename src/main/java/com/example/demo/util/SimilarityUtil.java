@@ -5,7 +5,7 @@ import java.util.*;
 
 public class SimilarityUtil {
 
-    // 🔧 Nettoyage et normalisation de texte (accents, majuscules, ponctuation)
+    //  Nettoyage et normalisation de texte (accents, majuscules, ponctuation)
     private static String normalize(String text) {
         if (text == null) return "";
 
@@ -41,7 +41,7 @@ public class SimilarityUtil {
         return freq;
     }
 
-    // 📏 Calcul de la similarité cosinus entre deux vecteurs de mots
+    //  Calcul de la similarité cosinus entre deux vecteurs de mots
     public static double computeCosineSimilarity(String text1, String text2) {
         Map<String, Double> vec1 = getWordFrequency(text1);
         Map<String, Double> vec2 = getWordFrequency(text2);

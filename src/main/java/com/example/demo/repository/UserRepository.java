@@ -11,12 +11,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
     /**
-     * 🧍 Nombre total d’utilisateurs
+     *  Nombre total d’utilisateurs
      */
     long count();
 
     /**
-     * 🧑‍💻 Nombre d’agents actifs : ceux qui ont au moins traité un ticket
+     *  Nombre d’agents actifs : ceux qui ont au moins traité un ticket
      */
     @Query("SELECT COUNT(DISTINCT u) FROM User u JOIN Ticket t ON t.assignedTo = u WHERE u.role = 'AGENT'")
     long countActiveAgents();

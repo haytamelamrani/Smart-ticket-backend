@@ -32,7 +32,7 @@ public class User {
     private String email;
     private String password;
     private String company;
-    // 🟡 Champs pour OTP :
+    //  Champs pour OTP :
     private String otpCode;
     private LocalDateTime otpGeneratedAt;
     private boolean isVerified;

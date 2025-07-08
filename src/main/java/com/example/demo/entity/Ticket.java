@@ -35,14 +35,14 @@ public class Ticket {
     private LocalDateTime etatUpdatedAt;
     private LocalDateTime createdAt;
 
-     // ✅ Champ pour savoir si le client a confirmé la clôture
+     //  Champ pour savoir si le client a confirmé la clôture
      private boolean confirmedByClient;
 
-     // ✅ Avis/Note du client à la fin
+     //  Avis/Note du client à la fin
     private String clientFeedback;
     private Integer clientRating;
 
-    // ✅ Utilisateur à qui le ticket est assigné (agent ou admin)
+    //  Utilisateur à qui le ticket est assigné (agent ou admin)
     @ManyToOne
     @JoinColumn(name = "assigned_to")
     private User assignedTo;

@@ -1,7 +1,7 @@
 package com.example.demo.config;
 
-import com.example.demo.config.JwtAuthFilter;
-import com.example.demo.config.JwtService;
+import com.example.demo.config.JwtAuthFilter;//a faire 
+import com.example.demo.config.JwtService;//a faire 
 import com.example.demo.repository.UserRepository;
 import com.example.demo.security.UserDetailsImpl;
 
@@ -30,23 +30,23 @@ import java.util.List;
 public class SecurityConfig {
 
     private final JwtService jwtService;
-    private final UserRepository userRepository; // 🔍 Injecte ton repo utilisateur
+    private final UserRepository userRepository; //  Injecte ton repo utilisateur
 
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> userRepository.findByEmail(username)
-            .map(UserDetailsImpl::new) // ✅ transforme User → UserDetails
+            .map(UserDetailsImpl::new) //  transforme User → UserDetails
             .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé : " + username));
     }
 
 
-    // 🔒 Filtre JWT branché avec le userDetailsService
+    //  Filtre JWT branché avec le userDetailsService
     @Bean
     public JwtAuthFilter jwtAuthFilter(UserDetailsService userDetailsService) {
         return new JwtAuthFilter(jwtService, userDetailsService);
     }
 
-    // 🔐 Configuration de sécurité globale
+    //  Configuration de sécurité globale
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
         return http
@@ -56,13 +56,13 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**", "/error").permitAll()
 
-                // 📦 Accès réservé aux admins
+                //  Accès réservé aux admins
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
 
-                // 🔧 Accès pour agents et admins
+                //  Accès pour agents et admins
                 .requestMatchers("/api/agent/**").hasAnyRole("AGENT", "ADMIN")
 
-                // 👤 Accès client uniquement
+                //  Accès client uniquement
                 .requestMatchers("/api/client/**").hasRole("CLIENT")
 
                 // Le reste : connexion requise
