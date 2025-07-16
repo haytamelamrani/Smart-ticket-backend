@@ -154,10 +154,10 @@ public class AuthService {
         return "✅ Mot de passe réinitialisé avec succès.";
     }
 
-    private boolean sendEmail(String to, String subject, String text) {
+    public boolean sendEmail(String to, String subject, String text) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom("smartlearn907@gmail.com");
+            message.setFrom("Smart Ticket <smartlearn907@gmail.com>");
             message.setTo(to);
             message.setSubject(subject);
             message.setText(text);

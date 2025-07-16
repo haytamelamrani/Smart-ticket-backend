@@ -43,4 +43,14 @@ public class User {
     @JoinColumn(name = "team_id")
     private Team team;
 
+    private String specialite; // Exemple : "réseau", "logiciel", etc.
+
+    public String getSpecialite() {
+        return specialite;
+    }
+
+    // ✅ Setter
+    public void setSpecialite(String specialite) {
+        this.specialite = specialite;
+    }
 }

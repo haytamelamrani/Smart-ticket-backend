@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="6" author="lostora">
+        <createTable tableName="ticket">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="category" type="VARCHAR(100)"/>
+            <column name="priority" type="VARCHAR(100)"/>
+            <column name="type" type="VARCHAR(100)"/>
+            <column name="user_email" type="VARCHAR(255)"/>
+            <column name="etat" type="VARCHAR(100)"/>
+            <column name="etat_updated_at" type="TIMESTAMP"/>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="confirmed_by_client" type="BOOLEAN"/>
+            <column name="client_feedback" type="VARCHAR(1000)"/>
+            <column name="client_rating" type="INTEGER"/>
+            <column name="assigned_to" type="BIGINT"/>
+            <column name="assigned_team_id" type="BIGINT"/>
+            <column name="archived" type="BOOLEAN" defaultValueBoolean="false"/>
+        </createTable>
+
+        <!-- 🔗 Clé étrangère vers User (assigned_to) -->
+        <addForeignKeyConstraint
+                baseTableName="ticket"
+                baseColumnNames="assigned_to"
+                constraintName="fk_ticket_user"
+                referencedTableName="users"
+                referencedColumnNames="id"
+                onDelete="SET NULL"/>
+
+        <!-- 🔗 Clé étrangère vers Team (assigned_team_id) -->
+        <addForeignKeyConstraint
+                baseTableName="ticket"
+                baseColumnNames="assigned_team_id"
+                constraintName="fk_ticket_team"
+                referencedTableName="team"
+                referencedColumnNames="id"
+                onDelete="SET NULL"/>
+    </changeSet>
+</databaseChangeLog>

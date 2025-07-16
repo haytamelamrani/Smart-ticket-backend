@@ -10,5 +10,6 @@ public record UserAdminDto(
     String role,
     String company,
     Boolean isVerified,
-    LocalDateTime lastLoginAt
+    LocalDateTime lastLoginAt,
+    String specialite
 ) {}

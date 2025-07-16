@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import lombok.Builder;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -62,4 +63,7 @@ public class Ticket {
     @JoinColumn(name = "assigned_team_id")
     private Team assignedTeam;
     
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean archived = false;
 }

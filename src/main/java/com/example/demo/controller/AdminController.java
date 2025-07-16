@@ -1,10 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.AdminDashboardDto;
+import com.example.demo.dto.AgentStatsDto;
 import com.example.demo.dto.UpdateUserRoleDto;
 import com.example.demo.dto.UserAdminDto;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.DashboardService;
+import com.example.demo.service.TicketService;
 import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -25,6 +28,7 @@ public class AdminController {
     private final UserRepository userRepository;
     private final UserService userService;
     private final DashboardService dashboardService;
+    private final TicketService ticketService;
 
     //  1. Récupérer tous les utilisateurs
     @GetMapping("/users")
@@ -38,7 +42,8 @@ public class AdminController {
                 user.getRole().name(),
                 user.getCompany(),
                 user.isVerified(),
-                user.getLastLoginAt()
+                user.getLastLoginAt(),
+                user.getSpecialite()
             ))
             .toList();
 
@@ -75,4 +80,22 @@ public class AdminController {
 
         return dashboardService.getAdminDashboard();
     }
+
+    @PutMapping("/users/{id}/specialite")
+    public ResponseEntity<?> updateSpecialite(
+            @PathVariable Long id,
+            @RequestBody Map<String, String> request
+    ) {
+        System.out.println("test");
+        String nouvelleSpecialite = request.get("specialite");
+        userService.updateSpecialite(id, nouvelleSpecialite);
+        return ResponseEntity.ok("Spécialité mise à jour");
+    }
+
+    @GetMapping("/agents/stats")
+    public ResponseEntity<List<AgentStatsDto>> getAgentStats() {
+        return ResponseEntity.ok(ticketService.getAllAgentStats());
+    }
+
+
 }

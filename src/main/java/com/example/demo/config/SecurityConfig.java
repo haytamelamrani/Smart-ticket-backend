@@ -1,7 +1,5 @@
 package com.example.demo.config;
 
-import com.example.demo.config.JwtAuthFilter;//a faire 
-import com.example.demo.config.JwtService;//a faire 
 import com.example.demo.repository.UserRepository;
 import com.example.demo.security.UserDetailsImpl;
 
@@ -64,6 +62,8 @@ public class SecurityConfig {
 
                 //  Accès client uniquement
                 .requestMatchers("/api/client/**").hasRole("CLIENT")
+
+                .requestMatchers("/api/training/**").permitAll()
 
                 // Le reste : connexion requise
                 .anyRequest().authenticated()

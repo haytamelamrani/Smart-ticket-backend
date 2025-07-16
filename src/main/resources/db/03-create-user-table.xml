@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="3" author="lostora">
+        <createTable tableName="users">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(100)"/>
+            <column name="last_name" type="VARCHAR(100)"/>
+            <column name="email" type="VARCHAR(255)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="company" type="VARCHAR(255)"/>
+            <column name="otp_code" type="VARCHAR(10)"/>
+            <column name="otp_generated_at" type="TIMESTAMP"/>
+            <column name="is_verified" type="BOOLEAN"/>
+            <column name="role" type="VARCHAR(50)"/>
+            <column name="last_login_at" type="TIMESTAMP"/>
+            <column name="team_id" type="BIGINT"/>
+        </createTable>
+
+        <!-- 🔗 Clé étrangère vers la table team -->
+        <addForeignKeyConstraint
+                baseTableName="users"
+                baseColumnNames="team_id"
+                constraintName="fk_user_team"
+                referencedTableName="team"
+                referencedColumnNames="id"
+                onDelete="SET NULL"/>
+    </changeSet>
+    <changeSet id="users-add-specialite-5" author="lostora">
+    <addColumn tableName="users">
+        <column name="specialite" type="VARCHAR(100)"/>
+    </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

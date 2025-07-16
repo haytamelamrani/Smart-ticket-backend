@@ -15,11 +15,25 @@ public class TicketWithMessagesDTO {
     private String email;
     private LocalDateTime createdAt;
     private LocalDateTime etatUpdatedAt;
-
+    private boolean archived ;
+    private boolean confirmedByClient;
 
     private List<MessageDto> agentMessages;
     private List<MessageDto> aiMessages;
 
+    public void setArchived(boolean archived) {
+        this.archived = archived;
+    }
+    public Boolean getArchived() {
+        return archived;
+    }
+    public Boolean geConfirmedByClient() {
+        return confirmedByClient;
+    }
+    
+    public void setConfirmedByClient(boolean confirmedByClient) {
+        this.confirmedByClient = confirmedByClient;
+    }
     // Getters
     public Long getId() {
         return id;

@@ -41,4 +41,12 @@ public class UserService {
         userRepository.deleteById(id);
         return true;
     }
+
+    public void updateSpecialite(Long userId, String specialite) {
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+        user.setSpecialite(specialite);
+        userRepository.save(user);
+    }
+
 }
