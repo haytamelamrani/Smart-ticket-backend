@@ -4,6 +4,8 @@ import com.example.demo.dto.AdminDashboardDto;
 import com.example.demo.dto.AgentStatsDto;
 import com.example.demo.dto.UpdateUserRoleDto;
 import com.example.demo.dto.UserAdminDto;
+import com.example.demo.entity.Ticket;
+import com.example.demo.repository.TicketRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.DashboardService;
 import com.example.demo.service.TicketService;
@@ -17,6 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -29,6 +32,7 @@ public class AdminController {
     private final UserService userService;
     private final DashboardService dashboardService;
     private final TicketService ticketService;
+    private final TicketRepository ticketRepository;
 
     //  1. Récupérer tous les utilisateurs
     @GetMapping("/users")
@@ -95,6 +99,34 @@ public class AdminController {
     @GetMapping("/agents/stats")
     public ResponseEntity<List<AgentStatsDto>> getAgentStats() {
         return ResponseEntity.ok(ticketService.getAllAgentStats());
+    }
+
+
+    @GetMapping("/tickets")
+    public List<Ticket> getAllTickets() {
+        return ticketRepository.findAll();
+    }
+
+    @PutMapping("/tickets/{id}")
+    public ResponseEntity<Ticket> updateTicket(@PathVariable Long id, @RequestBody Ticket updatedTicket) {
+        Optional<Ticket> optional = ticketRepository.findById(id);
+        if (optional.isEmpty()) return ResponseEntity.notFound().build();
+
+        Ticket ticket = optional.get();
+        ticket.setTitle(updatedTicket.getTitle());
+        ticket.setDescription(updatedTicket.getDescription());
+        ticket.setPriority(updatedTicket.getPriority());
+        ticket.setType(updatedTicket.getType());
+        ticket.setEtat(updatedTicket.getEtat());
+
+        return ResponseEntity.ok(ticketRepository.save(ticket));
+    }
+
+    @DeleteMapping("/tickets/{id}")
+    public ResponseEntity<Void> deleteTicket(@PathVariable Long id) {
+        if (!ticketRepository.existsById(id)) return ResponseEntity.notFound().build();
+        ticketRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
 

@@ -89,13 +89,14 @@ public class TicketServiceImpl implements TicketService {
                 "🔥 Priorité : %s\n" +
                 "📂 Type : %s\n" +
                 "📅 Date de création : %s\n\n" +
-                "🔗 Lien vers l’interface : http://localhost:3000/AllTickets\n\n" +
+                "🔗 Lien vers l’interface : http://localhost:3000/AllTickets?id=%s\n\n" +
                 "Merci de le traiter dans les plus brefs délais.",
                 ticket.getTitle(),
                 ticket.getDescription(),
                 ticket.getPriority(),
                 ticket.getType(),
-                ticket.getCreatedAt().toString()
+                ticket.getCreatedAt().toString(),
+                String.valueOf(ticket.getId())
             );
     
             for (User user : users) {

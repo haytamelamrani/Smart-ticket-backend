@@ -14,17 +14,14 @@ import com.example.demo.service.TicketSimilarityService;
 import com.example.demo.util.TicketVectorizer;
 
 import java.util.Map;
-import java.util.HashMap;
 import java.util.List;
 
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
-import org.mapstruct.control.MappingControl.Use;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -124,7 +121,6 @@ public class TicketController {
                 .map(sol -> ResponseEntity.ok(Map.of("solution", sol)))
                 .orElse(ResponseEntity.ok(Map.of("solution", "Aucune solution trouvée")));
     }
-
     
     @GetMapping("/with-messages-Specialite/{email}")
     public ResponseEntity<?> getMatchingTicketsWithMessages(@PathVariable String email) {
